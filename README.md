@@ -1,3 +1,3 @@
 # sachy-cv
 záznam šachové hry z kamery
-lkj
+![sachy](DSC_0397.JPG)
