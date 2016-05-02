@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="58aab8ea-5b4e-4a84-92eb-cba8c6b307ed" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Sachy.py" afterPath="$PROJECT_DIR$/Sachy.py" />
     </list>
     <ignored path="sachy-cv.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -310,6 +309,14 @@
       <option name="presentableId" value="Default" />
       <updated>1461933250711</updated>
     </task>
+    <task id="LOCAL-00001" summary="hledame kruznice">
+      <created>1462191869117</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1462191869117</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -345,6 +352,11 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_NEW_TODO" value="false" />
+    <MESSAGE value="hledame kruznice" />
+    <option name="LAST_COMMIT_MESSAGE" value="hledame kruznice" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
