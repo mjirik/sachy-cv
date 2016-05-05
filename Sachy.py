@@ -93,16 +93,19 @@ def nacti_obrazek():
 def najdi_zmeny(kruznice, kruznice_prev):
     zmeny=[]
     for k in range(len(kruznice)):
-        pass
+        je_kruznice_v_seznamu(kruznice[k], kruznice_prev)
+        kr=je_kruznice_v_seznamu(kruznice[k], kruznice_prev)
 
+        if kr==False:
+            zmeny.append(k)
 
-
-            # if len(vzdalenosti) == 0:
-            #     zmeny.append(kruznice[k])
-            # else:
-            #     if np.min(vzdalenosti) > 10:
-            #         zmeny.append(kruznice[k])
-    print zmeny
+        # if len(vzdalenosti) == 0:
+        #         zmeny.append(kruznice[k])
+        # else:
+        #     if np.min(vzdalenosti) > 10:
+        #             zmeny.append(kruznice[k])
+    # print zmeny
+        print kr
     return zmeny
 
 
@@ -118,31 +121,38 @@ def je_kruznice_v_seznamu(kruz, kruznice_prev):
 
     return False
 
-kr1=[[20, 35, 15],
-     [15, 47, 10],
-     [17, 23 ,11]]
-
-kr2 = [[20, 35, 15],
-       [25, 67, 10],
-       [17, 23, 11]]
-
-# najdi_zmeny(kr1, kr2)
-print je_kruznice_v_seznamu(kr1[2], kr2)
-
-# obr = nacti_obrazek()
-# while True:
-#     obr_prev = obr
-#     obr = nacti_obrazek()
+# kr1=[[20, 35, 15],
+#      [15, 47, 10],
+#      [17, 23 ,11],
+#      [29, 56, 12]]
 #
-#     kruznice = najdi_kruznice(obr, 0.4)
-#     kruznice_prev = najdi_kruznice(obr_prev, 0.4)
+# kr2 = [[20, 35, 15],
+#        [25, 67, 10],
+#        [17, 23, 11],
+#        [35, 26, 19]]
+#
+# print najdi_zmeny(kr1, kr2)
+# print je_kruznice_v_seznamu(kr1, kr2)
 
+obr = nacti_obrazek()
+while True:
+    obr_prev = obr
+    obr = nacti_obrazek()
+
+    kruznice = najdi_kruznice(obr, 0.4)
+    kruznice_prev = najdi_kruznice(obr_prev, 0.4)
+
+    zmeny = najdi_zmeny(kruznice, kruznice_prev)
+    print zmeny
     # vymaluj_kruznice(kruznice, kruznice_prev, obr, obr_prev, [255, 0, 0])
-    # zmeny = najdi_zmeny(kruznice, kruznice_prev)
+    zmenene_kruznice = []
+    if len(zmenene_kruznice) > 0:
+        vymaluj_kruznice([kruznice[zmeny[0]]], kruznice_prev, obr, obr_prev, [255, 0, 0])
 
-
-
-
+    print zmeny
+    print najdi_zmeny(kruznice, kruznice_prev)
+    plt.imshow(obr, cmap="gray")
+    plt.show()
 
 
 # cap = cv2.VideoCapture(1)
@@ -152,8 +162,6 @@ print je_kruznice_v_seznamu(kr1[2], kr2)
 # img = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
 
-# plt.imshow(obr, cmap="gray")
-# plt.show()
-
 # while True:
 #     pass
+
