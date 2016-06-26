@@ -17,9 +17,72 @@ from matplotlib.pyplot import imshow
 import matplotlib.pyplot as plt
 import numpy as np
 import cv2
+# from __future__ import print_function
 
-def fce():
-    return 0
+import math
+import numpy as np
+import matplotlib.pyplot as plt
+
+from skimage import data
+from skimage import transform as tf
+
+margins = dict(hspace=0.01, wspace=0.01, top=1, bottom=0, left=0, right=1)
+
+def policka(kruz):
+    pismeno = ""
+    if kruz[1] < 50:
+        pismeno = "A"
+    else:
+        if kruz[1] < 100:
+            pismeno = "B"
+        else:
+            if kruz[1] < 150:
+                pismeno = "C"
+            else:
+                if kruz[1] < 200:
+                    pismeno = "D"
+                else:
+                    if kruz[1] < 250:
+                        pismeno = "E"
+                    else:
+                        if kruz[1] < 300:
+                            pismeno = "F"
+                        else:
+                            if kruz[1] < 350:
+                                pismeno = "G"
+                            else:
+                                if kruz[1] < 400:
+                                    pismeno = "H"
+    cislice = ""
+    if kruz[0] < 50:
+        cislice = "1"
+    else:
+        if kruz[0] < 100:
+            cislice = "2"
+        else:
+            if kruz[0] < 150:
+                cislice = "3"
+            else:
+                if kruz[0] < 200:
+                    cislice = "4"
+                else:
+                    if kruz[0] < 250:
+                        cislice = "5"
+                    else:
+                        if kruz[0] < 300:
+                            cislice = "6"
+                        else:
+                            if kruz[0] < 350:
+                                cislice = "7"
+                            else:
+                                if kruz[0] < 400:
+                                    cislice = "8"
+
+
+    return pismeno + cislice
+
+# def fce():
+#     return 0
 
 def najdi_kruznice(obr, prah_kruznice):
     edg = skimage.feature.canny(rgb2gray(obr),3)
@@ -85,7 +148,7 @@ def vzdalenost(stred1, stred2):
 def nacti_obrazek():
     URL = "http://uc452cam01-kky.fav.zcu.cz/snapshot.jpg"
     img = skimage.io.imread(URL)
-    plt.imshow(img)
+    # plt.imshow(img)
     # plt._show()
     obr=img
     return obr
@@ -104,8 +167,7 @@ def najdi_zmeny(kruznice, kruznice_prev):
         # else:
         #     if np.min(vzdalenosti) > 10:
         #             zmeny.append(kruznice[k])
-    # print zmeny
-        print kr
+        # print kr
     return zmeny
 
 
@@ -121,37 +183,150 @@ def je_kruznice_v_seznamu(kruz, kruznice_prev):
 
     return False
 
-# kr1=[[20, 35, 15],
-#      [15, 47, 10],
-#      [17, 23 ,11],
-#      [29, 56, 12]]
+
+# jen na zacatku
+# obrazek = nacti_obrazek()
 #
-# kr2 = [[20, 35, 15],
-#        [25, 67, 10],
-#        [17, 23, 11],
-#        [35, 26, 19]]
+# plt.imshow(obrazek)
+
+# rohy_sachovnice = np.asarray(plt.ginput(4))
+# plt.show()
+
+rohy_sachovnice = np.asarray([
+    [  92.40322581, 5.9516129 ],
+    [  65.30645161, 456.27419355],
+    [ 586.59677419, 456.27419355],
+    [ 554.33870968, 13.69354839]])
+# print rohy_sachovnice
+
+src = np.array((
+    (0, 0),
+    (0, 400),
+    (400, 400),
+    (400, 0)
+))
+dst = rohy_sachovnice
+
+
+tform3 = tf.ProjectiveTransform()
+tform3.estimate(src, dst)
+
+obrazek = nacti_obrazek()
+
+# s kazdym nactenim
+# print obrazek[:5,:5,:]
+# warped = tf.warp(obrazek, tform3, output_shape=(400, 400))
+# print "obrazek, ", obrazek[:5,:5,:]
+# print "warped ", warped[:5,:5,:]
+
+# fig, (ax1, ax2) = plt.subplots(nrows=2, figsize=(8, 3))
+# fig.subplots_adjust(**margins)
+# plt.gray()
+# ax1.imshow(obrazek)
+# ax1.plot(dst[:, 0], dst[:, 1], '.r')
+# ax1.axis('off')
+# ax2.imshow(warped)
+# ax2.axis('off')
+# plt.show()
+#
+# kruznice =[[20, 35, 15],
+#      [225, 177, 10],
+#      [217, 23 ,11],
+#      [129, 56, 12]]
+#
+# kruznice_prev = [[20, 35, 15],
+#         [217, 23, 11],
+#         [55, 117, 10],
+#         [129, 56, 12]]
 #
 # print najdi_zmeny(kr1, kr2)
 # print je_kruznice_v_seznamu(kr1, kr2)
 
+# obr = nacti_obrazek()
+# obr = tf.warp(obr, tform3, output_shape=(400, 400))
+# obr_prev = nacti_obrazek()
+# obr_prev = tf.warp(obr_prev, tform3, output_shape=(400, 400))
+#
+# zmeny = najdi_zmeny(kruznice, kruznice_prev)
+# print zmeny
+# vymaluj_kruznice(kr1, kr2, obr, obr_prev, [255, 0, 0])
+# zmenene_kruznice = []
+# if len(zmeny)>0:
+#     zmenene_kruznice = [kruznice[zmeny[0]]]
+    # print zmenene_kruznice
+    # zmenene_kruznice = [[60, 78, 20]]
+# vymaluj_kruznice(zmenene_kruznice, kruznice_prev, obr, obr_prev, [1.0, 0, 0])
+
+
+
+# print zmeny[0]
+
+# zmenene_kruznice = [kruznice[zmeny[0]]]
+# print zmenene_kruznice
+
+# plt.imshow(obr)
+# rohy_sachovnice = plt.ginput(4)
+# plt.show()
+# print rohy_sachovnice
+
+# zmena_prev = najdi_zmeny(kruznice_prev, kruznice)
+# print kruznice[zmeny[0]]
+# print policka(kruznice_prev[zmena_prev[0]]) + " -> " + policka(kruznice[zmeny[0]])
+# + " -> " + policka(kruznice_prev[])
+
+# print zmena_prev
+# print policka(kruznice_prev[zmena_prev[0]])
+
+#
+#     print zmeny
 obr = nacti_obrazek()
 while True:
-    obr_prev = obr
+    warped = tf.warp(obrazek, tform3, output_shape=(400, 400))
+    # print "obrazek, ", obrazek[:5,:5,:]
+    # print "warped ", warped[:5,:5,:]
     obr = nacti_obrazek()
+    obr = tf.warp(obr, tform3, output_shape=(400, 400))
+    obr_prev = nacti_obrazek()
+    obr_prev = tf.warp(obr_prev, tform3, output_shape=(400, 400))
 
+
+
+    # print "obrazek, ", obrazek[:5, :5, :]
+    # print "warped ", warped[:5, :5, :]
+
+    fig, (ax1, ax2) = plt.subplots(nrows=2, figsize=(8, 3))
+    fig.subplots_adjust(**margins)
+    plt.gray()
+    # ax1.imshow(obr)
+    ax1.plot(dst[:, 0], dst[:, 1], '.r')
+    ax1.axis('off')
+    # ax2.imshow(warped)
+    ax2.axis('off')
+    # plt.show()
+#
     kruznice = najdi_kruznice(obr, 0.4)
     kruznice_prev = najdi_kruznice(obr_prev, 0.4)
-
+    print "kruznice", kruznice
+    print "kruznice_prev", kruznice_prev
     zmeny = najdi_zmeny(kruznice, kruznice_prev)
-    print zmeny
+    # print zmeny
     # vymaluj_kruznice(kruznice, kruznice_prev, obr, obr_prev, [255, 0, 0])
     zmenene_kruznice = []
-    if len(zmenene_kruznice) > 0:
-        vymaluj_kruznice([kruznice[zmeny[0]]], kruznice_prev, obr, obr_prev, [255, 0, 0])
+    if len(zmeny) > 0:
+        zmenene_kruznice = [kruznice[zmeny[0]]]
 
-    print zmeny
-    print najdi_zmeny(kruznice, kruznice_prev)
-    plt.imshow(obr, cmap="gray")
+    # print zmenene_kruznice
+        # zmenene_kruznice = [[60, 78, 20]]
+    # vymaluj_kruznice(zmenene_kruznice, kruznice_prev, obr, obr_prev, [1.0, 0, 0])
+    # print zmeny
+    # print najdi_zmeny(kruznice, kruznice_prev)
+    zmena_prev = najdi_zmeny(kruznice_prev, kruznice)
+
+    if len(zmenene_kruznice) > 0:
+        print policka(kruznice_prev[zmena_prev[0]]) + " -> " + policka(kruznice[zmeny[0]])
+    else:
+        print "Zadna zmena"
+    # plt.imshow(obr, cmap="gray")
     plt.show()
 
 
