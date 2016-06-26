@@ -145,7 +145,7 @@ def nacti_obrazek():
     cap = cv2.VideoCapture(0)
     ret, frame = cap.read()
     img = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    plt.imshow(img, cmap="gray")
+    # plt.imshow(img, cmap="gray")
     # cap = cv2.VideoCapture(0)
     # ret, frame = cap.read()
     #
