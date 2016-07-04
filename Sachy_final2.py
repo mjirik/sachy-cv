@@ -235,6 +235,10 @@ while True:
     # print kruznice
     # print kruznice_prev
 
+    # if len(kruznice) > len(kruznice_prev):
+    #     kruznice=najdi_kruznice(obr,0.4)
+
+
     zmeny = najdi_zmeny(kruznice, kruznice_prev)
     # print zmeny
 
@@ -253,10 +257,15 @@ while True:
         print "Zadne zmeny"
 
     else:
-        print policka(kruznice[zmeny[0]])  + " -> " + policka(kruznice_prev[zmena_prev[0]])
-        if len(zmeny)>1:
-            print policka(kruznice[zmeny[1]]) + " -> " + policka(kruznice_prev[zmena_prev[1]])
+        if len(kruznice)==len(kruznice_prev):
 
-    plt.show()
+            print policka(kruznice[zmeny[0]])  + " -> " + policka(kruznice_prev[zmena_prev[0]])
+            if len(zmeny)>1:
+                print policka(kruznice[zmeny[1]]) + " -> " + policka(kruznice_prev[zmena_prev[1]])
+
+        else:
+            print "Figurka byla vyhozena"
+
+        plt.show()
 
 pass

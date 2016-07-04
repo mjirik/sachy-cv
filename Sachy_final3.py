@@ -145,7 +145,7 @@ def nacti_obrazek():
     cap = cv2.VideoCapture(0)
     ret, frame = cap.read()
     img = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    plt.imshow(img, cmap="gray")
+    # plt.imshow(img, cmap="gray")
     # cap = cv2.VideoCapture(0)
     # ret, frame = cap.read()
     #
@@ -232,8 +232,17 @@ while True:
 
     kruznice = najdi_kruznice(obr, 0.4)
     kruznice_prev = najdi_kruznice(obr_prev, 0.4)
+
+
+    f = 0
+    f = len(kruznice) - len(kruznice_prev)
+
     # print kruznice
     # print kruznice_prev
+
+    # if len(kruznice) > len(kruznice_prev):
+    #     kruznice=najdi_kruznice(obr,0.4)
+
 
     zmeny = najdi_zmeny(kruznice, kruznice_prev)
     # print zmeny
@@ -253,10 +262,16 @@ while True:
         print "Zadne zmeny"
 
     else:
-        print policka(kruznice[zmeny[0]])  + " -> " + policka(kruznice_prev[zmena_prev[0]])
-        if len(zmeny)>1:
-            print policka(kruznice[zmeny[1]]) + " -> " + policka(kruznice_prev[zmena_prev[1]])
+        if len(kruznice)==len(kruznice_prev):
 
-    plt.show()
+            print policka(kruznice[zmeny[0]])  + " -> " + policka(kruznice_prev[zmena_prev[0]])
+            if len(zmeny)>1:
+                print policka(kruznice[zmeny[1]]) + " -> " + policka(kruznice_prev[zmena_prev[1]])
+
+        else:
+            print "Figurka byla vyhozena! " + "Pocet:"
+
+
+        plt.show()
 
 pass
